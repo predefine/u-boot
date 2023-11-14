@@ -31,6 +31,10 @@ config TARGET_MT7623
 	  Peripherals include Gigabit Ethernet, switch, USB3.0 and OTG, PCIe,
 	  I2S, PCM, S/PDIF, UART, SPI, I2C, IR TX/RX, and PWM.
 
+config TARGET_MT6580
+	bool "MediaTek MT6580 SoC"
+	select CPU_V7A
+
 config TARGET_MT7629
 	bool "MediaTek MT7629 SoC"
 	select CPU_V7A
@@ -108,6 +112,7 @@ endchoice
 
 config SYS_BOARD
 	string "Board name"
+	default "mt6580" if TARGET_MT6580
 	default "mt7622" if TARGET_MT7622
 	default "mt7623" if TARGET_MT7623
 	default "mt7629" if TARGET_MT7629
@@ -126,6 +131,7 @@ config SYS_BOARD
 
 config SYS_CONFIG_NAME
 	string "Board configuration name"
+	default "mt6580" if TARGET_MT6580
 	default "mt7622" if TARGET_MT7622
 	default "mt7623" if TARGET_MT7623
 	default "mt7629" if TARGET_MT7629
@@ -147,6 +153,6 @@ config MTK_BROM_HEADER_INFO
 	default "media=nor" if TARGET_MT8518 || TARGET_MT8512 || TARGET_MT7629 || TARGET_MT7622
 	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8183
 	default "media=snand;nandinfo=2k+64" if TARGET_MT7981 || TARGET_MT7986 || TARGET_MT7988
-	default "lk=1" if TARGET_MT7623
+	default "lk=1" if TARGET_MT7623 || TARGET_MT6580
 
 endif
