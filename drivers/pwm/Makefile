@@ -9,6 +9,7 @@
 #ccflags-y += -DDEBUG
 
 obj-$(CONFIG_DM_PWM)		+= pwm-uclass.o
+obj-$(CONFIG_DM_PWM_DISPLAY)	+= pwm-display-uclass.o
 
 obj-$(CONFIG_PWM_ASPEED)	+= pwm-aspeed.o
 obj-$(CONFIG_PWM_AT91)		+= pwm-at91.o
@@ -24,3 +25,4 @@ obj-$(CONFIG_PWM_SIFIVE)	+= pwm-sifive.o
 obj-$(CONFIG_PWM_TEGRA)		+= tegra_pwm.o
 obj-$(CONFIG_PWM_SUNXI)		+= sunxi_pwm.o
 obj-$(CONFIG_PWM_TI_EHRPWM)	+= pwm-ti-ehrpwm.o
+obj-$(CONFIG_PWM_DISPLAY_MTK)	+= pwm-display-mtk.o

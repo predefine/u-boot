@@ -9,6 +9,17 @@ config DM_PWM
 	  frequency/period can be controlled along with the proportion of that
 	  time that the signal is high.
 
+config DM_PWM_DISPLAY
+	bool "Enable support for Display PWM devices"
+	depends on DM
+	help
+	  A pulse-width modulator emits a pulse of varying width and provides
+	  control over the duty cycle (high and low time) of the signal. This
+	  is often used to control a voltage level. The more time the PWM
+	  spends in the 'high' state, the higher the voltage. The PWM's
+	  frequency/period can be controlled along with the proportion of that
+	  time that the signal is high.
+
 config PWM_ASPEED
 	bool "Enable support for the Aspeed PWM"
 	depends on DM_PWM
@@ -68,6 +79,7 @@ config PWM_MTK
 	  This PWM is found on MT7622, MT7623, and MT7629. It supports a
 	  programmable period and duty cycle.
 
+
 config PWM_ROCKCHIP
 	bool "Enable support for the Rockchip PWM"
 	depends on DM_PWM
@@ -118,3 +130,10 @@ config PWM_TI_EHRPWM
 	default y
 	help
 	  PWM driver support for the EHRPWM controller found on TI SOCs.
+
+config PWM_DISPLAY_MTK
+	bool "Enable support for MediaTek PWM"
+	depends on DM_PWM_DISPLAY
+	help
+	  This PWM is found on MT6580, MT8321. It used for manage display
+	  backlight

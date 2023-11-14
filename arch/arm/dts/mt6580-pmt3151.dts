@@ -125,3 +125,7 @@
 	pinctrl-0 = <&uart0_pins_a>;
 	status = "okay";
 };
+
+&display_pwm {
+	status = "okay";
+};

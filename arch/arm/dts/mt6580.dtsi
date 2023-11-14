@@ -96,6 +96,13 @@
         arm,cpu-registers-not-fw-configured;
     };
 
+    clk26m: oscillator-0 {
+        compatible = "fixed-clock";
+        #clock-cells = <0>;
+        clock-frequency = <26000000>;
+        clock-output-names = "clk26m";
+    };
+
     gic: interrupt-controller@10210000 {
         #address-cells = <0>;
         #interrupt-cells = <3>;
@@ -163,6 +170,14 @@
         clocks = <&pericfg CLK_PERI_MSDC30_0>,
                 <&topckgen CLK_TOP_MSDC30_0_SEL>;
         clock-names = "source", "hclk";
+        status = "disabled";
+    };
+
+    display_pwm: display_pwm@1100f000  {
+        compatible = "mediatek,display-pwm";
+        reg = <0x1100f000 0x1000>;
+        interrupts = <GIC_SPI 33 IRQ_TYPE_LEVEL_LOW>;
+        clock = <&clk26m>;
         status = "disabled";
     };
 };
