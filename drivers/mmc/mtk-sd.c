@@ -1767,6 +1767,16 @@ static const struct dm_mmc_ops msdc_ops = {
 	.wait_dat0 = msdc_ops_wait_dat0,
 };
 
+static const struct msdc_compatible mt6580_compat = {
+	.clk_div_bits = 8,
+	.pad_tune0 = true,
+	.async_fifo = true,
+	.data_tune = true,
+	.busy_check = false,
+	.stop_clk_fix = false,
+	.enhance_rx = false
+};
+
 static const struct msdc_compatible mt7620_compat = {
 	.clk_div_bits = 8,
 	.pad_tune0 = false,
@@ -1857,6 +1867,7 @@ static const struct msdc_compatible mt8183_compat = {
 };
 
 static const struct udevice_id msdc_ids[] = {
+	{ .compatible = "mediatek,mt6580-mmc", .data = (ulong)&mt6580_compat },
 	{ .compatible = "mediatek,mt7620-mmc", .data = (ulong)&mt7620_compat },
 	{ .compatible = "mediatek,mt7621-mmc", .data = (ulong)&mt7621_compat },
 	{ .compatible = "mediatek,mt7622-mmc", .data = (ulong)&mt7622_compat },

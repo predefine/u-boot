@@ -76,6 +76,30 @@
 };*/
 
 &pinctrl {
+	mmc0_pins_default: mmc0default {
+		mux {
+			function = "msdc";
+			groups =  "msdc0";
+		};
+
+		conf-clk {
+			pins = "MSDC0_CLK";
+			bias-pull-down;
+		};
+
+		conf-cmd-data {
+			pins = "MSDC0_CMD", "MSDC0_DAT0", "MSDC0_DAT1",
+			       "MSDC0_DAT2", "MSDC0_DAT3", "MSDC0_DAT4",
+			       "MSDC0_DAT5", "MSDC0_DAT6", "MSDC0_DAT7";
+			input-enable;
+			bias-pull-up;
+		};
+
+		conf-rst {
+			pins = "MSDC0_RSTB";
+			bias-pull-up;
+		};
+	};
     uart0_pins_a: uart0-default {
 		mux {
 			function = "uart";
@@ -84,9 +108,20 @@
 	};
 };
 
+&mmc0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&mmc0_pins_default>;
+	status = "okay";
+	bus-width = <8>;
+	max-frequency = <50000000>;
+	cap-mmc-highspeed;
+	vmmc-supply = <&reg_3p3v>;
+	vqmmc-supply = <&reg_1p8v>;
+	non-removable;
+};
 
 &uart0 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&uart0_pins_a>;
-	status = "disabled";
+	status = "okay";
 };

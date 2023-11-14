@@ -1,10 +1,10 @@
-#include <dt-bindings/clock/mt7623-clk.h>
+#include <dt-bindings/clock/mt6580-clk.h>
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/phy/phy.h>
-#include <dt-bindings/power/mt7623-power.h>
-#include <dt-bindings/reset/mt7623-reset.h>
+#include <dt-bindings/power/mt6580-power.h>
+#include <dt-bindings/reset/mt6580-reset.h>
 #include "skeleton.dtsi"
 
 / {
@@ -93,7 +93,7 @@
                         GIC_PPI 14 8
                         GIC_PPI 11 8
                         GIC_PPI 10 8>;
-	arm,cpu-registers-not-fw-configured;
+        arm,cpu-registers-not-fw-configured;
     };
 
     gic: interrupt-controller@10210000 {
@@ -108,26 +108,26 @@
                 0x10200100 0x1000>;
     };
 
-        pericfg: pericfg@10003000 {
-        compatible = "mediatek,mt7623-pericfgt", "syscon";
+    pericfg: syscon@10003000 {
+        compatible = "mediatek,mt6580-pericfg", "syscon";
         reg = <0x10003000 0x1000>;
         #clock-cells = <1>;
     };
 
-    topckgen: topckgen@10000000 {
-        compatible = "mediatek,mt7623-topckgent";
+    topckgen: clock-controller@10000000 {
+        compatible = "mediatek,mt6580-topckgen";
         reg = <0x10000000 0x1000>;
         #clock-cells = <1>;
     };
 
-    apmixedsys: apmixedsys@10209000 {
-        compatible = "mediatek,mt7623-apmixedsys";
+    apmixedsys: clock-controller@10209000 {
+        compatible = "mediatek,mt6580-apmixedsys";
         reg = <0x10018000 0x1000>;
         #clock-cells = <1>;
     };
 
-    infracfg: infracfg@10201000 {
-        compatible = "mediatek,mt7622-infracfg",
+    infracfg: syscon@10201000 {
+        compatible = "mediatek,mt6580-infracfg",
                         "syscon";
         reg = <0x10201000 0x1000>;
         #clock-cells = <1>;
@@ -136,7 +136,7 @@
 
 
     pinctrl: pinctrl@10005000 {
-        compatible = "mediatek,mt7623-pinctrl";
+        compatible = "mediatek,mt6580-pinctrl";
         reg = <0x10005000 0x1000>;
 
         gpio: gpio-controller {
@@ -145,21 +145,24 @@
         };
     };
 
-    clk26m: oscillator-0 {
-        compatible = "fixed-clock";
-        #clock-cells = <0>;
-        clock-frequency = <26000000>;
-        clock-output-names = "clk26m";
-    };
-
     uart0: serial@11005000 {
         compatible = "mediatek,hsuart";
-        reg = <0x11005000 0x400>;
+        reg = <0x11005000 0x1000>;
         reg-shift = <2>;
         interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_LOW>;
-        clocks = <&clk26m>;
-        //assigned-clocks = <&topckgen CLK_TOP_AXI_SEL>;
-        //assigned-clock-parents = <&topckgen CLK_TOP_SYSPLL1_D2>;
+        clocks = <&topckgen CLK_TOP_UART_SEL>,
+                 <&pericfg CLK_PERI_UART0>;
+        clock-names = "baud", "bus";
+        status = "disabled";
+    };
+
+    mmc0: mmc@11120000 {
+        compatible = "mediatek,mt6580-mmc";
+        reg = <0x11230000 0x1000>;
+        interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_LOW>;
+        clocks = <&pericfg CLK_PERI_MSDC30_0>,
+                <&topckgen CLK_TOP_MSDC30_0_SEL>;
+        clock-names = "source", "hclk";
         status = "disabled";
     };
 };
