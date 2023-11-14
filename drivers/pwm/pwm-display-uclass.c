@@ -19,6 +19,30 @@ int display_pwm_set_backlight(struct udevice *dev, uint8_t level){
 	return ops->set_backlight(dev, level);
 }
 
+int initr_display_pwm(void)
+{
+	struct udevice *dev;
+	struct uclass *uc;
+	int ret;
+
+	ret = uclass_get(UCLASS_DISPLAY_PWM, &uc);
+	if (ret) {
+		log_debug("Error getting UCLASS_DISPLAY_PWM: %d\n", ret);
+		return 0;
+	}
+
+	uclass_foreach_dev(dev, uc) {
+		ret = device_probe(dev);
+		if (ret) {
+			log_debug("Error probing %s: %d\n", dev->name, ret);
+			continue;
+		}
+		display_pwm_set_backlight(dev, 255);
+	}
+
+	return 0;
+}
+
 UCLASS_DRIVER(display_pwm) = {
 	.id		= UCLASS_DISPLAY_PWM,
 	.name		= "display_pwm",

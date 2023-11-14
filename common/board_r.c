@@ -66,6 +66,7 @@
 #include <asm-generic/gpio.h>
 #include <efi_loader.h>
 #include <relocate.h>
+#include <display_pwm.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -658,6 +659,9 @@ static init_fnc_t init_sequence_r[] = {
 	arch_early_init_r,
 #endif
 	power_init_board,
+#ifdef CONFIG_DM_PWM_DISPLAY
+	initr_display_pwm,
+#endif
 #ifdef CONFIG_MTD_NOR_FLASH
 	initr_flash,
 #endif
