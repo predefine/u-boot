@@ -6,7 +6,11 @@
 
 #define DISPLAY_PWM_EN_OFF     0x0
 #define DISPLAY_PWM_COMMIT_OFF 0x8
+#define DISPLAY_PWM_CON_0_OFF  0x10
 #define DISPLAY_PWM_CON_1_OFF  0x14
+
+#define CLK_MUX_SEL0 0x10000000
+#define CLK_GATING_CTRL 0x10000020
 
 struct mtk_display_pwm_priv {
 	void __iomem *base;
@@ -22,17 +26,23 @@ static int mtk_display_pwm_is_enabled(struct udevice *dev){
 
 static void mtk_display_pwm_set_enabled(struct udevice *dev, int enable){
     struct mtk_display_pwm_priv *priv = dev_get_priv(dev);
-    if(enable){
+    /*if(enable){
         if(!mtk_display_pwm_is_enabled(dev))
             writel(priv->base + DISPLAY_PWM_EN_OFF, 0);
     } else
-        writel(priv->base + DISPLAY_PWM_EN_OFF, 0);
+        writel(priv->base + DISPLAY_PWM_EN_OFF, 0);*/
+    if((!!enable) != (!!mtk_display_pwm_is_enabled(dev)))
+        writel(priv->base + DISPLAY_PWM_EN_OFF, !!enable);
 }
 
 static void mtk_display_pwm_init(struct udevice *dev){
     struct mtk_display_pwm_priv *priv = dev_get_priv(dev);
     if(priv->pwm_inited) return;
-    writel(priv->base + DISPLAY_PWM_CON_1_OFF, 1023);
+
+    int reg_cg = readl(CLK_GATING_CTRL);
+    int reg_val = readl(CLK_MUX_SEL0);
+    writel(CLK_MUX_SEL0, reg_val & 0xfffbffff);
+    writel(CLK_GATING_CTRL, reg_cg & 0xfffffffe);
     priv->pwm_inited = 1;
 }
 
@@ -46,16 +56,13 @@ int mtk_display_pwm_set_backlight(struct udevice *dev, uint8_t level){
         level_pwm = (level << 2)+2;
 
     clk_enable(&priv->clk);
-    if(level == 0){
-        mtk_display_pwm_set_enabled(dev, 0);
-        goto end;
-    } else
-        mtk_display_pwm_set_enabled(dev, 1);
-
     mtk_display_pwm_init(dev);
 
     writel(priv->base + DISPLAY_PWM_COMMIT_OFF, 0);
     writel(priv->base + DISPLAY_PWM_CON_1_OFF, (level_pwm << 16) | 0x3ff);
+
+    mtk_display_pwm_set_enabled(dev, level != 0);
+
     writel(priv->base + DISPLAY_PWM_COMMIT_OFF, 1);
     writel(priv->base + DISPLAY_PWM_COMMIT_OFF, 0);
 

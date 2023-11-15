@@ -20,4 +20,6 @@ struct display_pwm_ops {
 
 int display_pwm_set_backlight(struct udevice *dev, uint8_t level);
 
+int initr_display_pwm(void);
+
 #endif /* _display_pwm_h_ */

@@ -125,7 +125,7 @@ config PWM_TI_EHRPWM
 	  PWM driver support for the EHRPWM controller found on TI SOCs.
 
 config PWM_DISPLAY_MTK
-	bool "Enable support for MediaTek PWM"
+	bool "Enable support for MediaTek Display PWM"
 	depends on DM_PWM_DISPLAY
 	help
 	  This PWM is found on MT6580, MT8321. It used for manage display
