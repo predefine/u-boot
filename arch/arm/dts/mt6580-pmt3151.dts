@@ -19,7 +19,8 @@
 	};
 
 	chosen {
-		stdout-path = &uart0;
+		//stdout-path = &uart0;
+		console = &uart0;
 		tick-timer = &timer0;
 	};
 
@@ -51,10 +52,10 @@
 	};
 };
 
-/*&mmc0 {
+&mmc0 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&mmc0_pins_default>;
-	status = "okay";
+	status = "disabled";
 	bus-width = <8>;
 	max-frequency = <50000000>;
 	cap-mmc-highspeed;
@@ -73,7 +74,7 @@
 	r_smpl = <1>;
 	vmmc-supply = <&reg_3p3v>;
 	vqmmc-supply = <&reg_3p3v>;
-};*/
+};
 
 &pinctrl {
 	mmc0_pins_default: mmc0default {
@@ -100,24 +101,37 @@
 			bias-pull-up;
 		};
 	};
+
+        mmc1_pins_default: mmc1default {
+		mux {
+			function = "msdc";
+			groups =  "msdc1", "msdc1_wp_0";
+		};
+		conf-cmd-data {
+                        pins = "MSDC1_DAT0", "MSDC1_DAT1", "MSDC1_DAT2",
+                               "MSDC1_DAT3", "MSDC1_DAT3", "MSDC1_CMD";
+			input-enable;
+			drive-strength = <4>;
+			bias-pull-up;
+		};
+		conf-clk {
+			pins = "MSDC1_CLK";
+			drive-strength = <4>;
+		};
+		conf-wp {
+			pins = "EINT7";
+			input-enable;
+			bias-pull-up;
+		};
+
+	};
+
     uart0_pins_a: uart0-default {
 		mux {
 			function = "uart";
 			groups =  "uart0_0_txd_rxd";
 		};
 	};
-};
-
-&mmc0 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&mmc0_pins_default>;
-	status = "okay";
-	bus-width = <8>;
-	max-frequency = <50000000>;
-	cap-mmc-highspeed;
-	vmmc-supply = <&reg_3p3v>;
-	vqmmc-supply = <&reg_1p8v>;
-	non-removable;
 };
 
 &uart0 {

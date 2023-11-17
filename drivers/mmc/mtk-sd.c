@@ -1768,7 +1768,7 @@ static const struct dm_mmc_ops msdc_ops = {
 };
 
 static const struct msdc_compatible mt6580_compat = {
-	.clk_div_bits = 8,
+	.clk_div_bits = 12,
 	.pad_tune0 = true,
 	.async_fifo = true,
 	.data_tune = true,
