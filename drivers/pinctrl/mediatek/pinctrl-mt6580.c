@@ -276,12 +276,12 @@ static const struct mtk_pin_field_calc mt6580_pin_pupd_range[] = {
 	PIN_FIELD16(120, 120, 0xcf0, 0x10, 4, 1),
 	PIN_FIELD16(121, 121, 0xcf0, 0x10, 0, 1),
 	/* MSDC1 */
-	PIN_FIELD16(53, 53, 0xd40, 0x10, 8, 1),
-	PIN_FIELD16(52, 52, 0xd30, 0x10, 8, 1),
-	PIN_FIELD16(57, 57, 0xd60, 0x10, 0, 1),
-	PIN_FIELD16(56, 56, 0xd60, 0x10, 10, 1),
-	PIN_FIELD16(55, 55, 0xd60, 0x10, 4, 1),
-	PIN_FIELD16(54, 54, 0xc60, 0x10, 12, 1),
+	PIN_FIELD16(105, 105, 0xd40, 0x10, 8, 1),
+	PIN_FIELD16(106, 106, 0xd30, 0x10, 8, 1),
+	PIN_FIELD16(107, 107, 0xd60, 0x10, 0, 1),
+	PIN_FIELD16(108, 108, 0xd60, 0x10, 10, 1),
+	PIN_FIELD16(109, 109, 0xd60, 0x10, 4, 1),
+	PIN_FIELD16(110, 110, 0xc60, 0x10, 12, 1),
 	/* MSDC1 */
 	PIN_FIELD16(85, 85, 0xda0, 0x10, 8, 1),
 	PIN_FIELD16(86, 86, 0xd90, 0x10, 8, 1),
@@ -318,12 +318,12 @@ static const struct mtk_pin_field_calc mt6580_pin_r1_range[] = {
 	PIN_FIELD16(120, 120, 0xcf0, 0x10, 5, 1),
 	PIN_FIELD16(121, 121, 0xcf0, 0x10, 1, 1),
 	/* MSDC1 */
-	PIN_FIELD16(53, 53, 0xd40, 0x10, 9, 1),
-	PIN_FIELD16(52, 52, 0xd30, 0x10, 9, 1),
-	PIN_FIELD16(57, 57, 0xd60, 0x10, 1, 1),
-	PIN_FIELD16(56, 56, 0xd60, 0x10, 9, 1),
-	PIN_FIELD16(55, 55, 0xd60, 0x10, 5, 1),
-	PIN_FIELD16(54, 54, 0xc60, 0x10, 13, 1),
+	PIN_FIELD16(105, 105, 0xd40, 0x10, 9, 1),
+	PIN_FIELD16(106, 106, 0xd30, 0x10, 9, 1),
+	PIN_FIELD16(107, 107, 0xd60, 0x10, 1, 1),
+	PIN_FIELD16(108, 108, 0xd60, 0x10, 9, 1),
+	PIN_FIELD16(109, 109, 0xd60, 0x10, 5, 1),
+	PIN_FIELD16(110, 110, 0xc60, 0x10, 13, 1),
 	/* MSDC2 */
 	PIN_FIELD16(85, 85, 0xda0, 0x10, 9, 1),
 	PIN_FIELD16(86, 86, 0xd90, 0x10, 9, 1),
@@ -360,12 +360,12 @@ static const struct mtk_pin_field_calc mt6580_pin_r0_range[] = {
 	PIN_FIELD16(120, 120, 0xcf0, 0x10, 6, 1),
 	PIN_FIELD16(121, 121, 0xcf0, 0x10, 2, 1),
 	/* MSDC1 */
-	PIN_FIELD16(53, 53, 0xd40, 0x10, 10, 1),
-	PIN_FIELD16(52, 52, 0xd30, 0x10, 10, 1),
-	PIN_FIELD16(57, 57, 0xd60, 0x10, 2, 1),
-	PIN_FIELD16(56, 56, 0xd60, 0x10, 8, 1),
-	PIN_FIELD16(55, 55, 0xd60, 0x10, 6, 1),
-	PIN_FIELD16(54, 54, 0xc60, 0x10, 14, 1),
+	PIN_FIELD16(105, 105, 0xd40, 0x10, 10, 1),
+	PIN_FIELD16(106, 106, 0xd30, 0x10, 10, 1),
+	PIN_FIELD16(107, 107, 0xd60, 0x10, 2, 1),
+	PIN_FIELD16(108, 108, 0xd60, 0x10, 8, 1),
+	PIN_FIELD16(109, 109, 0xd60, 0x10, 6, 1),
+	PIN_FIELD16(110, 110, 0xc60, 0x10, 14, 1),
 	/* MSDC2 */
 	PIN_FIELD16(85, 85, 0xda0, 0x10, 10, 1),
 	PIN_FIELD16(86, 86, 0xd90, 0x10, 10, 1),
@@ -509,12 +509,12 @@ static const struct mtk_pin_desc mt6580_pins[] = {
 	MTK_PIN(102, "SPI2_MI", DRV_FIXED),
 	MTK_PIN(103, "SPI2_MO", DRV_FIXED),
 	MTK_PIN(104, "SPI2_CLK", DRV_FIXED),
-	MTK_PIN(53,  "MSDC1_CMD", DRV_GRP4),
-	MTK_PIN(52,  "MSDC1_CLK", DRV_GRP4),
-	MTK_PIN(57,  "MSDC1_DAT0", DRV_GRP4),
-	MTK_PIN(56,  "MSDC1_DAT1", DRV_GRP4),
-	MTK_PIN(55,  "MSDC1_DAT2", DRV_GRP4),
-	MTK_PIN(54,  "MSDC1_DAT3", DRV_GRP4),
+	MTK_PIN(105, "MSDC1_CMD", DRV_GRP4),
+	MTK_PIN(106, "MSDC1_CLK", DRV_GRP4),
+	MTK_PIN(107, "MSDC1_DAT0", DRV_GRP4),
+	MTK_PIN(108, "MSDC1_DAT1", DRV_GRP4),
+	MTK_PIN(109, "MSDC1_DAT2", DRV_GRP4),
+	MTK_PIN(110, "MSDC1_DAT3", DRV_GRP4),
 	MTK_PIN(111, "MSDC0_DAT7", DRV_GRP4),
 	MTK_PIN(112, "MSDC0_DAT6", DRV_GRP4),
 	MTK_PIN(113, "MSDC0_DAT5", DRV_GRP4),
@@ -803,11 +803,11 @@ static const int mt6580_mdc_mdio_funcs[] = { 1, 1, };
 static const int mt6580_msdc0_pins[] = { 111, 112, 113, 114, 115, 116, 117, 118,
 					 119, 120, 121, };
 static const int mt6580_msdc0_funcs[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, };
-static const int mt6580_msdc1_pins[] = { 53, 52, 57, 56, 55, 54, };
+static const int mt6580_msdc1_pins[] = { 105, 106, 107, 108, 109, 110, };
 static const int mt6580_msdc1_funcs[] = { 1, 1, 1, 1, 1, 1, };
 static const int mt6580_msdc1_ins_pins[] = { 261, };
 static const int mt6580_msdc1_ins_funcs[] = { 1, };
-static const int mt6580_msdc1_wp_0_pins[] = { 72, };
+static const int mt6580_msdc1_wp_0_pins[] = { 29, };
 static const int mt6580_msdc1_wp_0_funcs[] = { 1, };
 static const int mt6580_msdc1_wp_1_pins[] = { 55, };
 static const int mt6580_msdc1_wp_1_funcs[] = { 3, };

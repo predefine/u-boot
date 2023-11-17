@@ -55,7 +55,7 @@
 &mmc0 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&mmc0_pins_default>;
-	status = "disabled";
+	status = "okay";
 	bus-width = <8>;
 	max-frequency = <50000000>;
 	cap-mmc-highspeed;
@@ -65,9 +65,10 @@
 };
 
 &mmc1 {
+	// BROKEN!
 	pinctrl-names = "default";
 	pinctrl-0 = <&mmc1_pins_default>;
-	status = "okay";
+	status = "disabled";
 	bus-width = <4>;
 	max-frequency = <50000000>;
 	cap-sd-highspeed;
