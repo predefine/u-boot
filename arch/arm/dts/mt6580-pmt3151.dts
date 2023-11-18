@@ -57,7 +57,7 @@
 	pinctrl-0 = <&mmc0_pins_default>;
 	status = "okay";
 	bus-width = <8>;
-	max-frequency = <50000000>;
+	max-frequency = <208000000>;
 	cap-mmc-highspeed;
 	vmmc-supply = <&reg_3p3v>;
 	vqmmc-supply = <&reg_1p8v>;
@@ -68,10 +68,11 @@
 	// BROKEN!
 	pinctrl-names = "default";
 	pinctrl-0 = <&mmc1_pins_default>;
-	status = "disabled";
+	status = "okay";
 	bus-width = <4>;
-	max-frequency = <50000000>;
+	max-frequency = <208000000>;
 	cap-sd-highspeed;
+	cd-gpios = <&gpio 3 0>;
 	r_smpl = <1>;
 	vmmc-supply = <&reg_3p3v>;
 	vqmmc-supply = <&reg_3p3v>;
